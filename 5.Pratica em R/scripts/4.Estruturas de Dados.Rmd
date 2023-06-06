@@ -32,14 +32,15 @@ VADeaths[,1]
 VADeaths[1,]
 #linhas 1 até 3
 VADeaths[1:3,]
+#linhas especificas com vetor
 VADeaths[c(1,3,5),]
 ```
 Data Frame
 ```{r}
 longley
-#funcina como matriz
+#funciona como matriz
 longley[,1:3]
-#acessar coluna com $
+#acessar coluna com $ (transforma em vetor)
 longley$Unemployed
 #ou nome
 longley['Unemployed']
