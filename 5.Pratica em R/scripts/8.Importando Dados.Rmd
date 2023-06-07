@@ -11,12 +11,12 @@ Texto
 #texto
 x = read.csv(file.choose(),header = TRUE, sep = ",")
 x
-x = read.csv("Credit.csv",header = TRUE, sep = ",")
+x = read.csv("H:/Meu Drive/Cursos/Formacao Cientista de Dados O Curso Completo 2023 - Udemy/formacao_data_science_udemy/5.Pratica em R/dados/Credit.csv",header = TRUE, sep = ",")
 x
 ```
 Excel
 ```{r}
-dados = read.xlsx("Credit.xlsx",sheet= 1)
+dados = read.xlsx("H:/Meu Drive/Cursos/Formacao Cientista de Dados O Curso Completo 2023 - Udemy/formacao_data_science_udemy/5.Pratica em R/dados/Credit.xlsx",sheet= 1)
 dados
 ```
 
