@@ -49,7 +49,7 @@ summary(dados$Salario)
 boxplot(dados$Salario)
 boxplot(dados$Salario,outline = F)
 ```
-Valore faltantes - NAs
+Valores faltantes - NAs
 ```{r}
 #valores faltantes NAs
 dados[!complete.cases(dados),]
@@ -58,7 +58,7 @@ Salários
 ```{r}
 #tratar salários
 summary(dados$Salario)
-#ver mediana
+#ver mediana - argumento na.rm = T para ignorar os valores na
 median(dados$Salario,na.rm = T)
 #atribuir mediana a NAs
 dados[is.na(dados$Salario),]$Salario = median(dados$Salario,na.rm = T)
@@ -70,7 +70,7 @@ Falta de padronização em Gênero
 #Ver valores
 unique(dados$Genero)
 summary(dados$Genero)
-#tranformar F e Fem em Feminino
+#transformar F e Fem em Feminino
 # "" , M em Masculino (moda)
 dados[is.na(dados$Genero) | dados$Genero == "M" ,]$Genero = "Masculino" 
 dados[dados$Genero == "F" | dados$Genero == "Fem", ]$Genero = "Feminino" 
