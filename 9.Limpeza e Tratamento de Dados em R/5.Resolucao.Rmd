@@ -1,0 +1,118 @@
+---
+title: "Resolução Faça Vc Mesmo Limpeza de Dados com R"
+---
+
+Tratar dados 'tempo.csv'
+Aparência: sol, nublado, chuva
+Temperatura: -130 ~ 130 F
+Umidade: 0 ~ 100
+Jogar: sim/nao
+Tratar valores NAs 
+
+```{r}
+# Importando dados
+df = read.csv("tempo.csv", sep = ";", na.strings = "", stringsAsFactors = T)
+head(df)
+
+```
+
+```{r}
+summary(df)
+```
+```{r}
+counts = table(df$Aparencia)
+counts
+barplot(counts,main="Aparencia",xlab = "Aparencia")
+```
+
+Realizada a exploração do atributo Aparencia, agora vou atribuir os dados de "menos"
+para a moda "sol" e excluir o valor "menos"
+
+```{r}
+df[df$Aparencia == "menos",]$Aparencia = "sol"
+df$Aparencia = factor(df$Aparencia)
+summary(df$Aparencia)
+```
+
+Explorando o atributo "temperatura"
+
+```{r}
+summary(df$Temperatura)
+```
+
+```{r}
+boxplot(df$Temperatura)
+```
+
+```{r}
+hist(df$Temperatura)
+```
+
+Utilizando a técnica de filtro de dois desvios padrões acima
+para descobrir o outlier
+```{r}
+desv = sd(df$Temperatura, na.rm = T)
+desv
+df[df$Temperatura >= 2 *desv,]$Temperatura
+```
+
+Atribuindo a mediana ao outlier
+```{r}
+median(df$Temperatura)
+df[df$Temperatura >=2 *desv,]$Temperatura = median(df$Temperatura)
+df[df$Temperatura >= 2 *desv,]$Temperatura
+```
+```{r}
+boxplot(df$Temperatura)
+```
+
+Explorando o atributo "umidade"
+```{r}
+summary(df$Umidade)
+```
+
+```{r}
+boxplot(df$Umidade)
+```
+
+```{r}
+hist(df$Umidade)
+```
+
+Tratando valor NA atribuindo a mediana
+```{r}
+median(df$Umidade, na.rm = T)
+df[is.na(df$Umidade),]$Umidade = median(df$Umidade, na.rm = T)
+summary(df$Umidade)
+```
+
+```{r}
+df[!complete.cases(df),]
+```
+
+Tratando o outlier atribuindo a mediana
+```{r}
+desvUmidade = sd(df$Umidade)
+desvUmidade
+```
+
+```{r}
+df[df$Umidade == 200,]$Umidade = median(df$Umidade)
+summary(df$Umidade)
+```
+
+Verificando mais NA's
+```{r}
+df[!complete.cases(df),]
+```
+
+Tratando valor NA do atributo "vento" atribuindo à moda "falso"
+```{r}
+summary(df$Vento)
+```
+
+```{r}
+df[is.na(df$Vento),]$Vento = "FALSO"
+summary(df$Vento)
+```
+
