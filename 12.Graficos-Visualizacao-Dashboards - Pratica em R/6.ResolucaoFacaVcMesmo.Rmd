@@ -1,0 +1,75 @@
+---
+title: "Resolução Faça Vc Mesmo"
+---
+
+1. Arquivo dados.csv
+  1. CODIGO
+  2. MUNICIPIO
+  3. PIB
+  4. VALOREMPENHO
+  
+2. Empenho em diárias em municípios gaúchos e PIB
+do municipio
+
+3. Execute um processo de Análise de Dados
+Exploratória para conhecimento/Entendimento
+destes dados
+
+```{r}
+#paleta de cores
+library("RColorBrewer")
+#install.packages("RColorBrewer")
+```
+
+```{r}
+df = read.csv("dados.csv", sep=";")
+head(df)
+```
+
+```{r}
+summary(df)
+```
+
+```{r}
+summary(df$VALOREMPENHO)
+```
+
+```{r}
+summary(df$PIB)
+```
+
+```{r}
+boxplot(df$VALOREMPENHO, main="Valores de Empenho", col=brewer.pal(n=3, name="Paired"), outline = F)
+boxplot(df$PIB, main="Valores de PIB", col=brewer.pal(n=3, name="Pastel1"), outline = F)
+hist(df$VALOREMPENHO, main="Valores de Empenho", col=brewer.pal(n=3, name="Paired"))
+hist(df$PIB, main="Valores de PIB", col=brewer.pal(n=3, name="Pastel1"), outline = F)
+```
+
+Buscando maiores empenhos
+```{r}
+Mempenho = head(df[order(-df$VALOREMPENHO),],10)
+barplot(Mempenho$VALOREMPENHO, col=brewer.pal(n = 10, name = "RdBu"),las=2,main = "Maiores Empenhos")
+legend("topright",legend=Mempenho$MUNICIPIO,col = brewer.pal(n = 10, name = "RdBu"), lty=1:2, cex=0.8, ncol = 2,lwd=4)
+box()
+```
+
+Maiores PIB's
+```{r}
+Mpibs =   head(df[order(-df$PIB),],10)
+barplot(Mpibs$PIB,col=brewer.pal(n = 10, name = "Spectral"),las=2,main = "Maiores PIBS")
+legend("topright",legend=Mempenho$MUNICIPIO,col = brewer.pal(n = 10, name = "Spectral"), lty=1:2, cex=0.8, ncol = 2,lwd=4)
+box()
+```
+
+Relação entre PIB e Empenho
+
+Cálculo % de PIB empenhado
+
+```{r}
+df$PROPORCAO = df$VALOREMPENHO / df$PIB
+Mprop = head(df[order(-df$PROPORCAO),], 10)
+barplot(Mprop$PROPORCAO, col=brewer.pal(n=10, name="Set2"), las=2, main="Maiores Gastos em Proporção ao PIB")
+legend("topright",legend=Mprop$MUNICIPIO,col = brewer.pal(n = 10, name = "Set2"), lty=1:2, cex=0.8, ncol = 2,lwd=4)
+box()
+```
+

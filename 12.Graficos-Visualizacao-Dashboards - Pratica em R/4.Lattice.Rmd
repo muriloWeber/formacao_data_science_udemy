@@ -31,7 +31,7 @@ histogram( ~weight | feed, data=chickwts)
 Gráfico de dispersão condicional
 CO2, seis plantas em dois locais, refrigeradas ou não durante a noite
 ```{r}
-#CO2, conc: concentração de co2, uptake: captação de co2
+#CO2, conc: concentração de co2, uptake: captação de co2 - "~" relação e "|" condição
 CO2
 xyplot(CO2$conc ~  CO2$uptake)
 #type é a origem 
