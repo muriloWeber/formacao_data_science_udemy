@@ -19,7 +19,7 @@ qqnorm(x)
 qqline(x)
 ```
 Teste de Shapiro
-Valor de p acima de 0,05, não há indício para a não confirmar a hipótese nula de dados normalmente distribuidos
+Valor de p acima de 0,05, não há indício para rejeitar a hipótese nula de dados normalmente distribuidos
 ```{r}
 shapiro.test(x) 
 ```
